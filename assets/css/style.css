@@ -10,3 +10,29 @@ body {
   padding: 1.5rem;
   font-size: 1.2rem;
 }
+
+.intro-section {
+  position: relative;
+  height: 30rem;
+}
+
+.intro-div {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+
+.intro-title {
+  font-size: 3rem;
+}
+
+.intro-info {
+  font-size: 1.2rem;
+  padding-bottom: 2rem;
+}
+
+.start-btn {
+  padding: 0.8rem;
+}
