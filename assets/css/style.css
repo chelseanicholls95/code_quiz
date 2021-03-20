@@ -11,12 +11,12 @@ body {
   font-size: 1.2rem;
 }
 
-.intro-section {
+.section {
   position: relative;
   height: 30rem;
 }
 
-.intro-div {
+.section-div {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -24,15 +24,19 @@ body {
   text-align: center;
 }
 
-.intro-title {
+.titles {
   font-size: 3rem;
 }
 
-.intro-info {
+.info {
   font-size: 1.2rem;
   padding-bottom: 2rem;
 }
 
 .start-btn {
   padding: 0.8rem;
+}
+
+.submit-btn {
+  margin-left: 0.5rem;
 }
