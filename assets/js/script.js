@@ -8,7 +8,16 @@ let timerValue = 3;
 
 const submitScore = (event) => {
   event.preventDefault();
-  console.log("submitted");
+  // get score
+
+  // get initials from input
+
+  // construct string
+
+  // store in local storage
+
+  // navigate to high scores page
+  location.assign("../../highscores.html");
 };
 
 const createAndAppendForm = () => {
