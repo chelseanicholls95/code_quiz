@@ -34,7 +34,7 @@ const questionsArray = [
   },
   {
     question: "What method is used to add items to an existing array?",
-    choices: [".split()", ".pop", ".push", ".sort"],
+    choices: [".split()", ".pop()", ".push()", ".sort()"],
     answer: ".push",
   },
 ];
@@ -97,7 +97,7 @@ const createAndAppendForm = () => {
   formElement.appendChild(submitScoreBtn);
 };
 
-const createAndAppendQuestion = () => {
+const createAndAppendQuestionCards = (array) => {
   // create elements for all html elements
   const sectionElement = document.createElement("div");
   const questionDivElement = document.createElement("div");
@@ -119,7 +119,11 @@ const createAndAppendQuestion = () => {
   buttonElement4.setAttribute("class", "choices");
 
   // add content to html elements
-  h2Element.textContent = "Question goes here";
+  h2Element.textContent = array.question;
+  buttonElement1.textContent = array.choices[0];
+  buttonElement2.textContent = array.choices[1];
+  buttonElement3.textContent = array.choices[2];
+  buttonElement4.textContent = array.choices[3];
 
   // add event listener to button
   buttonElement1.addEventListener("click", checkAnswer);
@@ -136,9 +140,27 @@ const createAndAppendQuestion = () => {
   buttonDivElement.appendChild(buttonElement2);
   buttonDivElement.appendChild(buttonElement3);
   buttonDivElement.appendChild(buttonElement4);
+
+  return sectionElement;
 };
 
-const checkAnswer = () => {};
+const checkAnswer = (event) => {
+  // if (questionsArray.choices[0] = questionsArray.answer) {
+  //   console.log("true");
+  // } else {
+  //   console.log("false");
+  // }
+  // check whether chosen answer matches answer
+  // if true -
+  // setAttribute "correct"
+  // "Correct!" displays underneath question
+  // timer setTimeOut
+  // createAndAppendQuestion()
+  // else -
+  // setAttribute "wrong"
+  // "Wrong!" displays underneath question
+  // timerValue -= 10
+};
 
 const startTimer = () => {
   const timerTick = () => {
@@ -162,7 +184,7 @@ const startQuiz = () => {
   startTimer();
 
   // create questions div
-  createAndAppendQuestion();
+  questionsArray.forEach(createAndAppendQuestionCards);
 };
 
 startQuizBtn.addEventListener("click", startQuiz);
