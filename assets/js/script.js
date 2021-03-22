@@ -14,7 +14,7 @@ const questionsArray = [
   },
   {
     question: "Which method is used to change a string into a number?",
-    choices: [".toNumber()", ".parseInt()", ".valueOf", ".parseFloat"],
+    choices: [".toNumber()", ".parseInt()", ".valueOf()", ".parseFloat()"],
     answer: ".parseInt()",
   },
   {
@@ -98,6 +98,37 @@ const createAndAppendForm = () => {
 };
 
 const createAndAppendQuestionCards = (array) => {
+  const checkAnswer = (event) => {
+    // check whether chosen answer matches answer
+    if (event.target.innerText == array.answer) {
+      event.target.setAttribute("class", "correct-answer");
+
+      const correctDiv = document.createElement("div");
+      const correct = document.createElement("div");
+
+      correct.setAttribute("class", "correct");
+
+      correct.textContent = "Correct!";
+
+      questionDivElement.appendChild(correctDiv);
+      correctDiv.appendChild(correct);
+    } else {
+      event.target.setAttribute("class", "wrong-answer");
+
+      const wrongDiv = document.createElement("div");
+      const wrong = document.createElement("div");
+
+      wrong.setAttribute("class", "wrong");
+
+      wrong.textContent = "Wrong!";
+
+      questionDivElement.appendChild(wrongDiv);
+      wrongDiv.appendChild(wrong);
+
+      timerValue -= 3;
+    }
+  };
+
   // create elements for all html elements
   const sectionElement = document.createElement("div");
   const questionDivElement = document.createElement("div");
@@ -140,26 +171,6 @@ const createAndAppendQuestionCards = (array) => {
   buttonDivElement.appendChild(buttonElement2);
   buttonDivElement.appendChild(buttonElement3);
   buttonDivElement.appendChild(buttonElement4);
-
-  return sectionElement;
-};
-
-const checkAnswer = (event) => {
-  // if (questionsArray.choices[0] = questionsArray.answer) {
-  //   console.log("true");
-  // } else {
-  //   console.log("false");
-  // }
-  // check whether chosen answer matches answer
-  // if true -
-  // setAttribute "correct"
-  // "Correct!" displays underneath question
-  // timer setTimeOut
-  // createAndAppendQuestion()
-  // else -
-  // setAttribute "wrong"
-  // "Wrong!" displays underneath question
-  // timerValue -= 10
 };
 
 const startTimer = () => {

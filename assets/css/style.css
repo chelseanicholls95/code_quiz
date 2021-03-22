@@ -51,6 +51,23 @@ body {
   margin: 0.5rem;
 }
 
+.correct-answer {
+  background-color: green;
+  padding: 1rem;
+  margin: 0.5rem;
+}
+
+.correct,
+.wrong {
+  font-size: 1rem;
+}
+
+.wrong-answer {
+  background-color: red;
+  padding: 1rem;
+  margin: 0.5rem;
+}
+
 .submit-btn {
   margin: 0.5rem;
 }
