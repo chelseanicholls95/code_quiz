@@ -4,7 +4,8 @@ const startQuizBtn = document.getElementById("start-btn");
 const introDivElement = document.getElementById("intro-section");
 const scriptElement = document.getElementById("script");
 
-let timerValue = 10;
+let timerValue = 30;
+let questionCounter = 0;
 const questionsArray = [
   {
     question:
@@ -35,7 +36,7 @@ const questionsArray = [
   {
     question: "What method is used to add items to an existing array?",
     choices: [".split()", ".pop()", ".push()", ".sort()"],
-    answer: ".push",
+    answer: ".push()",
   },
 ];
 
@@ -80,7 +81,7 @@ const createAndAppendForm = () => {
   // add content to html elements
   h2Element.textContent = "Game Over";
   infoDivElement.textContent = "Your score is: ";
-  spanElement.textContent = "0";
+  spanElement.textContent = timerValue;
   submitScoreBtn.textContent = "Submit";
 
   // add event listener to button
@@ -100,9 +101,11 @@ const createAndAppendForm = () => {
 const createAndAppendQuestionCards = (array) => {
   const checkAnswer = (event) => {
     // check whether chosen answer matches answer
-    if (event.target.innerText == array.answer) {
+    if (event.target.innerText === array.answer) {
+      // set class of correct-answer
       event.target.setAttribute("class", "correct-answer");
 
+      // show correct! underneath the question
       const correctDiv = document.createElement("div");
       const correct = document.createElement("div");
 
@@ -112,9 +115,14 @@ const createAndAppendQuestionCards = (array) => {
 
       questionDivElement.appendChild(correctDiv);
       correctDiv.appendChild(correct);
+
+      // add 1 to the question counter
+      questionCounter += 1;
     } else {
+      // set class to wrong-answer
       event.target.setAttribute("class", "wrong-answer");
 
+      // show wrong! underneath the question
       const wrongDiv = document.createElement("div");
       const wrong = document.createElement("div");
 
@@ -125,7 +133,12 @@ const createAndAppendQuestionCards = (array) => {
       questionDivElement.appendChild(wrongDiv);
       wrongDiv.appendChild(wrong);
 
-      timerValue -= 3;
+      // minus time from the timer
+      if (timerValue > 10) {
+        timerValue -= 10;
+      } else {
+        timerValue = 0;
+      }
     }
   };
 
@@ -178,7 +191,7 @@ const startTimer = () => {
     timerSpanElement.textContent = timerValue;
     timerValue -= 1;
 
-    if (timerValue < 0) {
+    if (timerValue < 0 || questionCounter === questionsArray.length) {
       clearInterval(timer);
       createAndAppendForm();
     }
