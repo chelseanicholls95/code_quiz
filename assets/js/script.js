@@ -40,21 +40,18 @@ const questionsArray = [
   },
 ];
 
-const submitScore = (event) => {
-  event.preventDefault();
-  // get score
-
-  // get initials from input
-
-  // construct string
-
-  // store in local storage
-
-  // navigate to high scores page
-  location.assign("../../highscores.html");
-};
-
 const createAndAppendForm = () => {
+  const submitScore = (event) => {
+    event.preventDefault();
+    // get score
+    const score = timerValue;
+    // get initials from input
+    const initials = inputElement.value;
+    // store in local storage
+    localStorage.setItem(initials, score);
+    // navigate to high scores page
+    location.assign("../../highscores.html");
+  };
   // create elements for all html elements
   const sectionElement = document.createElement("section");
   const divElement = document.createElement("div");
@@ -118,6 +115,9 @@ const createAndAppendQuestionCards = (array) => {
 
       // add 1 to the question counter
       questionCounter += 1;
+
+      // remove current question
+      bodyElement.removeChild(sectionElement);
     } else {
       // set class to wrong-answer
       event.target.setAttribute("class", "wrong-answer");
