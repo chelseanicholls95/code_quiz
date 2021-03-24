@@ -19,8 +19,16 @@ const getFromLocalStorage = () => {
   }
 };
 
+renderHighScoresTable = (highScores) => {
+  if (highScores.length === 0) {
+    // empty
+  } else {
+    // create table 
+};
+
 const onLoad = () => {
   const highScores = getFromLocalStorage();
+  renderHighScoresTable(highScores)
 };
 
 goBackBtn.addEventListener("click", goBack);
