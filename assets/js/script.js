@@ -7,6 +7,8 @@ const scriptElement = document.getElementById("script");
 
 let timerValue = 30;
 let questionCounter = 0;
+let index = 0;
+
 const questionsArray = [
   {
     question:
@@ -46,7 +48,7 @@ const startTimer = () => {
     timerSpanElement.textContent = timerValue;
     timerValue -= 1;
 
-    if (timerValue < 0 || questionCounter === questionsArray.length) {
+    if (timerValue < 0 || index === questionsArray.length) {
       clearInterval(timer);
     }
   };
@@ -54,7 +56,7 @@ const startTimer = () => {
   const timer = setInterval(timerTick, 1000);
 };
 
-createChoices = (choices) => {
+const createChoices = (choices) => {
   const parentDiv = document.createElement("div");
 
   createChoice = (choice) => {
@@ -74,7 +76,7 @@ createChoices = (choices) => {
   return parentDiv;
 };
 
-createQuestion = (question) => {
+const createQuestion = (question) => {
   const divElement = document.createElement("div");
   divElement.setAttribute("id", "question-container");
   divElement.setAttribute("class", "section-div");
@@ -86,9 +88,36 @@ createQuestion = (question) => {
 
   const choices = createChoices(question.choices);
 
+  divElement.addEventListener("click", checkAnswer);
+
   divElement.append(h2Element, choices);
 
   return divElement;
+};
+
+const renderQuestion = (question) => {
+  const questionContainer = createQuestion(question);
+
+  quizContainer.appendChild(questionContainer);
+};
+
+const checkAnswer = (event) => {
+  const target = event.target;
+  const currentTarget = event.currentTarget;
+
+  if (target.matches("button")) {
+    const answer = target.dataset.answer;
+
+    const correctAnswer = currentTarget.getAttribute("data-answer");
+
+    if (answer === correctAnswer) {
+      index += 1;
+
+      quizContainer.removeChild(document.getElementById("question-container"));
+
+      renderQuestion(questionsArray[index]);
+    }
+  }
 };
 
 const startQuiz = () => {
@@ -99,9 +128,7 @@ const startQuiz = () => {
   startTimer();
 
   // create questions div
-  const question = createQuestion(questionsArray[0]);
-
-  quizContainer.appendChild(question);
+  renderQuestion(questionsArray[index]);
 };
 
 startQuizBtn.addEventListener("click", startQuiz);
