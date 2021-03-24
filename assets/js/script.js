@@ -41,6 +41,32 @@ const questionsArray = [
     answer: ".push()",
   },
 ];
+const highScores = [];
+
+const submitScore = (event) => {
+  event.preventDefault();
+
+  const target = event.target;
+
+  if (target.matches("button")) {
+    const score = timerValue;
+    const initials = document.getElementById("name-input").value;
+
+    if (initials !== "") {
+      const highScore = {
+        initials: initials,
+        score: score,
+      };
+
+      const finalScore = JSON.stringify(highScore);
+      highScores.push(finalScore);
+
+      localStorage.setItem("highScores", highScores);
+    }
+
+    // location.href = "../../highscores.html";
+  }
+};
 
 const createAndAppendForm = () => {
   const divElement = document.createElement("div");
@@ -63,6 +89,7 @@ const createAndAppendForm = () => {
 
   const formElement = document.createElement("form");
   formElement.setAttribute("id", "score-form");
+  formElement.addEventListener("click", submitScore);
   divElement.appendChild(formElement);
 
   const inputElement = document.createElement("input");
@@ -152,11 +179,12 @@ const checkAnswer = (event) => {
 
     if (answer === correctAnswer) {
       const replaceQuestion = () => {
-        quizContainer.removeChild(
-          document.getElementById("question-container")
-        );
+        const questionContainer = document.getElementById("question-container");
+        if (index < questionsArray.length) {
+          quizContainer.removeChild(questionContainer);
 
-        renderQuestion(questionsArray[index]);
+          renderQuestion(questionsArray[index]);
+        }
       };
 
       index += 1;
