@@ -1,9 +1,4 @@
-const goBackBtn = document.getElementById("go-back-btn");
 const clearBtn = document.getElementById("clear-btn");
-
-const goBack = () => {
-  location.href = "../../index.html";
-};
 
 const clear = () => {
   localStorage.clear();
@@ -23,15 +18,15 @@ renderHighScoresTable = (highScores) => {
   if (highScores.length === 0) {
     // empty
   } else {
-    // create table 
+    // create table
+  }
 };
 
 const onLoad = () => {
   const highScores = getFromLocalStorage();
-  renderHighScoresTable(highScores)
+  renderHighScoresTable(highScores);
 };
 
-goBackBtn.addEventListener("click", goBack);
 clearBtn.addEventListener("click", clear);
 
 window.addEventListener("load", onLoad);
