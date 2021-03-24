@@ -6,7 +6,6 @@ const introDivElement = document.getElementById("intro-section");
 const scriptElement = document.getElementById("script");
 
 let timerValue = 30;
-let questionCounter = 0;
 let index = 0;
 
 const questionsArray = [
@@ -43,6 +42,43 @@ const questionsArray = [
   },
 ];
 
+const createAndAppendForm = () => {
+  const divElement = document.createElement("div");
+  divElement.setAttribute("class", "section-div");
+  quizContainer.appendChild(divElement);
+
+  const h2Element = document.createElement("h2");
+  h2Element.setAttribute("class", "title");
+  h2Element.textContent = "Game Over";
+  divElement.appendChild(h2Element);
+
+  const infoDivElement = document.createElement("div");
+  infoDivElement.setAttribute("class", "info");
+  infoDivElement.textContent = "Your score is: ";
+  divElement.appendChild(infoDivElement);
+
+  const spanElement = document.createElement("span");
+  spanElement.textContent = timerValue;
+  infoDivElement.appendChild(spanElement);
+
+  const formElement = document.createElement("form");
+  formElement.setAttribute("id", "score-form");
+  divElement.appendChild(formElement);
+
+  const inputElement = document.createElement("input");
+  inputElement.setAttribute("type", "text");
+  inputElement.setAttribute("placeholder", "Enter your initials here");
+  inputElement.setAttribute("id", "name-input");
+  formElement.appendChild(inputElement);
+
+  const submitScoreBtn = document.createElement("button");
+  submitScoreBtn.setAttribute("class", "submit-btn");
+  submitScoreBtn.setAttribute("id", "submit-btn");
+  submitScoreBtn.setAttribute("type", "submit");
+  submitScoreBtn.textContent = "Submit";
+  formElement.appendChild(submitScoreBtn);
+};
+
 const startTimer = () => {
   const timerTick = () => {
     timerSpanElement.textContent = timerValue;
@@ -50,13 +86,14 @@ const startTimer = () => {
 
     if (timerValue < 0 || index === questionsArray.length) {
       clearInterval(timer);
+      createAndAppendForm();
     }
   };
 
   const timer = setInterval(timerTick, 1000);
 };
 
-const createChoices = (choices) => {
+const createAndAppendChoices = (choices) => {
   const parentDiv = document.createElement("div");
 
   createChoice = (choice) => {
@@ -86,7 +123,7 @@ const createQuestion = (question) => {
   h2Element.setAttribute("class", "question");
   h2Element.textContent = question.question;
 
-  const choices = createChoices(question.choices);
+  const choices = createAndAppendChoices(question.choices);
 
   divElement.addEventListener("click", checkAnswer);
 
@@ -96,9 +133,11 @@ const createQuestion = (question) => {
 };
 
 const renderQuestion = (question) => {
-  const questionContainer = createQuestion(question);
+  if (index < questionsArray.length) {
+    const questionContainer = createQuestion(question);
 
-  quizContainer.appendChild(questionContainer);
+    quizContainer.appendChild(questionContainer);
+  }
 };
 
 const checkAnswer = (event) => {
