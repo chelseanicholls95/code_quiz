@@ -57,6 +57,7 @@ body {
   background-color: green;
   padding: 1rem;
   margin: 0.5rem;
+  width: 10rem;
 }
 
 .correct,
@@ -68,6 +69,7 @@ body {
   background-color: red;
   padding: 1rem;
   margin: 0.5rem;
+  width: 10rem;
 }
 
 .submit-btn {

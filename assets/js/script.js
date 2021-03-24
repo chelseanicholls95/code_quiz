@@ -86,6 +86,7 @@ const startTimer = () => {
 
     if (timerValue < 0 || index === questionsArray.length) {
       clearInterval(timer);
+      quizContainer.removeChild(document.getElementById("question-container"));
       createAndAppendForm();
     }
   };
@@ -150,11 +151,37 @@ const checkAnswer = (event) => {
     const correctAnswer = currentTarget.getAttribute("data-answer");
 
     if (answer === correctAnswer) {
+      const replaceQuestion = () => {
+        quizContainer.removeChild(
+          document.getElementById("question-container")
+        );
+
+        renderQuestion(questionsArray[index]);
+      };
+
       index += 1;
 
-      quizContainer.removeChild(document.getElementById("question-container"));
+      target.setAttribute("class", "correct-answer");
 
-      renderQuestion(questionsArray[index]);
+      const correct = document.createElement("div");
+      correct.setAttribute("class", "correct");
+      correct.textContent = "Correct!";
+      currentTarget.appendChild(correct);
+
+      setTimeout(replaceQuestion, 500);
+    } else {
+      target.setAttribute("class", "wrong-answer");
+
+      const wrong = document.createElement("div");
+      wrong.setAttribute("class", "wrong");
+      wrong.textContent = "Wrong!";
+      currentTarget.appendChild(wrong);
+
+      if (timerValue > 10) {
+        timerValue -= 10;
+      } else {
+        timerValue = 0;
+      }
     }
   }
 };
