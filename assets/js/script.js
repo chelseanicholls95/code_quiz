@@ -46,21 +46,22 @@ const highScores = [];
 const submitScore = (event) => {
   event.preventDefault();
 
+  // get button event
   const target = event.target;
 
+  // if button is clicked
   if (target.matches("button")) {
     const score = timerValue;
     const initials = document.getElementById("name-input").value;
 
+    // if initials input is not empty, add initials and score to an array, set to local storage
     if (initials !== "") {
       const highScore = {
         initials: initials,
         score: score,
       };
-
       const finalScore = JSON.stringify(highScore);
       highScores.push(finalScore);
-
       localStorage.setItem("highScores", highScores);
     }
 
@@ -163,18 +164,17 @@ const createQuestion = (question) => {
 const renderQuestion = (question) => {
   if (index < questionsArray.length) {
     const questionContainer = createQuestion(question);
-
     quizContainer.appendChild(questionContainer);
   }
 };
 
 const checkAnswer = (event) => {
+  // get the button that was clicked and the div
   const target = event.target;
   const currentTarget = event.currentTarget;
 
   if (target.matches("button")) {
     const answer = target.dataset.answer;
-
     const correctAnswer = currentTarget.getAttribute("data-answer");
 
     if (answer === correctAnswer) {
@@ -182,29 +182,31 @@ const checkAnswer = (event) => {
         const questionContainer = document.getElementById("question-container");
         if (index < questionsArray.length) {
           quizContainer.removeChild(questionContainer);
-
           renderQuestion(questionsArray[index]);
         }
       };
 
       index += 1;
-
       target.setAttribute("class", "correct-answer");
 
+      // create div for text underneath choices
       const correct = document.createElement("div");
       correct.setAttribute("class", "correct");
       correct.textContent = "Correct!";
       currentTarget.appendChild(correct);
 
+      // time out of half a second to show correct text
       setTimeout(replaceQuestion, 500);
     } else {
       target.setAttribute("class", "wrong-answer");
 
+      // create div for text underneath choices
       const wrong = document.createElement("div");
       wrong.setAttribute("class", "wrong");
       wrong.textContent = "Wrong!";
       currentTarget.appendChild(wrong);
 
+      // reduce timer by 10 seconds if the remaining time is greater than 10 - if below, go straight to 0
       if (timerValue > 10) {
         timerValue -= 10;
       } else {
@@ -215,13 +217,11 @@ const checkAnswer = (event) => {
 };
 
 const startQuiz = () => {
-  // removed intro div
+  // remove intro div
   quizContainer.removeChild(introDivElement);
-
   // start timer
   startTimer();
-
-  // create questions div
+  // create question div
   renderQuestion(questionsArray[index]);
 };
 
