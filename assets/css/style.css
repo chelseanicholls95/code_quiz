@@ -22,9 +22,10 @@ body {
   left: 50%;
   transform: translate(-50%, -50%);
   text-align: center;
+  width: 100vw;
 }
 
-.titles {
+.title {
   font-size: 3rem;
 }
 
@@ -46,9 +47,10 @@ body {
   flex-direction: column;
 }
 
-.choices {
+.choice-btn {
   padding: 1rem;
   margin: 0.5rem;
+  width: 10rem;
 }
 
 .correct-answer {

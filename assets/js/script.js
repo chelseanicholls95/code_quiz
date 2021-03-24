@@ -1,6 +1,7 @@
 const bodyElement = document.body;
 const timerSpanElement = document.getElementById("timer");
 const startQuizBtn = document.getElementById("start-btn");
+const quizContainer = document.getElementById("quiz-container");
 const introDivElement = document.getElementById("intro-section");
 const scriptElement = document.getElementById("script");
 
@@ -53,14 +54,54 @@ const startTimer = () => {
   const timer = setInterval(timerTick, 1000);
 };
 
+createChoices = (choices) => {
+  const parentDiv = document.createElement("div");
+
+  createChoice = (choice) => {
+    const divElement = document.createElement("div");
+
+    const button = document.createElement("button");
+    button.setAttribute("data-answer", choice);
+    button.setAttribute("class", "choice-btn");
+    button.textContent = choice;
+
+    divElement.appendChild(button);
+
+    parentDiv.appendChild(divElement);
+  };
+  choices.forEach(createChoice);
+
+  return parentDiv;
+};
+
+createQuestion = (question) => {
+  const divElement = document.createElement("div");
+  divElement.setAttribute("id", "question-container");
+  divElement.setAttribute("class", "section-div");
+  divElement.setAttribute("data-answer", question.answer);
+
+  const h2Element = document.createElement("h2");
+  h2Element.setAttribute("class", "question");
+  h2Element.textContent = question.question;
+
+  const choices = createChoices(question.choices);
+
+  divElement.append(h2Element, choices);
+
+  return divElement;
+};
+
 const startQuiz = () => {
   // removed intro div
-  bodyElement.removeChild(introDivElement);
+  quizContainer.removeChild(introDivElement);
 
   // start timer
   startTimer();
 
   // create questions div
+  const question = createQuestion(questionsArray[0]);
+
+  quizContainer.appendChild(question);
 };
 
 startQuizBtn.addEventListener("click", startQuiz);
