@@ -41,7 +41,17 @@ const questionsArray = [
     answer: ".push()",
   },
 ];
-const highScores = [];
+
+const getHighScores = () => {
+  const highScores = localStorage.getItem("highScores");
+  console.log(highScores);
+
+  if (highScores) {
+    return JSON.parse(highScores);
+  } else {
+    return [];
+  }
+};
 
 const submitScore = (event) => {
   event.preventDefault();
@@ -60,9 +70,9 @@ const submitScore = (event) => {
         initials: initials,
         score: score,
       };
-      const finalScore = JSON.stringify(highScore);
-      highScores.push(finalScore);
-      localStorage.setItem("highScores", highScores);
+      const highScores = getHighScores();
+      highScores.push(highScore);
+      localStorage.setItem("highScores", JSON.stringify(highScores));
     }
 
     // location.href = "../../highscores.html";
@@ -189,6 +199,11 @@ const checkAnswer = (event) => {
       index += 1;
       target.setAttribute("class", "correct-answer");
 
+      // remove previous div
+      if (document.getElementById("wrong")) {
+        currentTarget.removeChild(document.getElementById("wrong"));
+      }
+
       // create div for text underneath choices
       const correct = document.createElement("div");
       correct.setAttribute("class", "correct");
@@ -200,9 +215,14 @@ const checkAnswer = (event) => {
     } else {
       target.setAttribute("class", "wrong-answer");
 
+      // remove previous div
+      if (document.getElementById("wrong")) {
+        currentTarget.removeChild(document.getElementById("wrong"));
+      }
       // create div for text underneath choices
       const wrong = document.createElement("div");
       wrong.setAttribute("class", "wrong");
+      wrong.setAttribute("id", "wrong");
       wrong.textContent = "Wrong!";
       currentTarget.appendChild(wrong);
 
