@@ -75,7 +75,7 @@ const submitScore = (event) => {
       localStorage.setItem("highScores", JSON.stringify(highScores));
     }
 
-    // location.href = "../../highscores.html";
+    location.href = "../../highscores.html";
   }
 };
 

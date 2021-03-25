@@ -13,13 +13,17 @@ body {
   text-align: center;
 }
 
-.titles {
+.title {
   font-size: 3rem;
 }
 
 .scores {
   font-size: 1.2rem;
   padding-bottom: 2rem;
+}
+
+.table {
+  border: 1px black solid;
 }
 
 .btn {
