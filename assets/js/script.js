@@ -7,6 +7,7 @@ const scriptElement = document.getElementById("script");
 
 let timerValue = 31;
 let index = 0;
+timerSpanElement.textContent = timerValue;
 
 const questionsArray = [
   {
@@ -44,7 +45,6 @@ const questionsArray = [
 
 const getHighScores = () => {
   const highScores = localStorage.getItem("highScores");
-  console.log(highScores);
 
   if (highScores) {
     return JSON.parse(highScores);
@@ -117,15 +117,25 @@ const createAndAppendForm = () => {
   formElement.appendChild(submitScoreBtn);
 };
 
+const showGameOverContainer = () => {
+  quizContainer.removeChild(document.getElementById("question-container"));
+  createAndAppendForm();
+};
+
 const startTimer = () => {
   const timerTick = () => {
-    timerValue -= 1;
     timerSpanElement.textContent = timerValue;
+    timerValue -= 1;
 
-    if (timerValue === 0 || index === questionsArray.length) {
+    if (timerValue <= 0) {
+      timerValue = 0;
       clearInterval(timer);
-      quizContainer.removeChild(document.getElementById("question-container"));
-      createAndAppendForm();
+      showGameOverContainer();
+    }
+    if (index === questionsArray.length) {
+      clearInterval(timer);
+      showGameOverContainer();
+      timerSpanElement.textContent = timerValue;
     }
   };
 
@@ -227,7 +237,7 @@ const checkAnswer = (event) => {
       currentTarget.appendChild(wrong);
 
       // reduce timer by 10 seconds if the remaining time is greater than 10 - if below, go straight to 0
-      if (timerValue > 10) {
+      if (timerValue >= 10) {
         timerValue -= 10;
       } else {
         timerValue = 0;
