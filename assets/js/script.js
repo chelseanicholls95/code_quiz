@@ -5,7 +5,7 @@ const quizContainer = document.getElementById("quiz-container");
 const introDivElement = document.getElementById("intro-section");
 const scriptElement = document.getElementById("script");
 
-let timerValue = 30;
+let timerValue = 31;
 let index = 0;
 
 const questionsArray = [
@@ -119,10 +119,10 @@ const createAndAppendForm = () => {
 
 const startTimer = () => {
   const timerTick = () => {
-    timerSpanElement.textContent = timerValue;
     timerValue -= 1;
+    timerSpanElement.textContent = timerValue;
 
-    if (timerValue < 0 || index === questionsArray.length) {
+    if (timerValue === 0 || index === questionsArray.length) {
       clearInterval(timer);
       quizContainer.removeChild(document.getElementById("question-container"));
       createAndAppendForm();
