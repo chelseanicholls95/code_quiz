@@ -98,7 +98,9 @@ body {
 
 .correct,
 .wrong {
-  font-size: 1rem;
+  padding-top: 0.3rem;
+  font-size: 1.5rem;
+  font-weight: bold;
 }
 
 .wrong-answer {
