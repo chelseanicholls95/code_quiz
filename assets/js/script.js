@@ -75,7 +75,8 @@ const submitScore = (event) => {
       localStorage.setItem("highScores", JSON.stringify(highScores));
     }
 
-    location.href = "../../highscores.html";
+    location.href =
+      "https://chelseanicholls95.github.io/code_quiz/highscores.html";
   }
 };
 
