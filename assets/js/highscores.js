@@ -19,6 +19,7 @@ const sortHighScores = (lowestScore, highestScore) =>
 const createTable = (highScores) => {
   const table = document.createElement("table");
   table.setAttribute("class", "table");
+  table.setAttribute("id", "table");
 
   const createRow = (highScores) => {
     const row = table.insertRow(-1);
@@ -35,7 +36,7 @@ const createTable = (highScores) => {
 
 const renderHighScoresTable = (highScores) => {
   if (highScores.length === 0) {
-    // empty
+    highScoresDiv.textContent = "No high scores saved";
   } else {
     createTable(highScores);
   }
@@ -43,6 +44,8 @@ const renderHighScoresTable = (highScores) => {
 
 const clear = () => {
   localStorage.clear();
+  highScoresDiv.removeChild(document.getElementById("table"));
+  highScoresDiv.textContent = "No high scores saved";
 };
 
 const onLoad = () => {

@@ -5,7 +5,7 @@ const quizContainer = document.getElementById("quiz-container");
 const introDivElement = document.getElementById("intro-section");
 const scriptElement = document.getElementById("script");
 
-let timerValue = 31;
+let timerValue = 60;
 let index = 0;
 timerSpanElement.textContent = timerValue;
 
