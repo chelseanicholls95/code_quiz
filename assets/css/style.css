@@ -115,3 +115,37 @@ body {
   margin: 0.5rem;
   padding: 0.2rem 0.5rem;
 }
+
+@media screen and (max-width: 1000px) {
+  .section-div {
+    width: 70vw;
+  }
+
+  .section {
+    height: 90vh;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .section-div {
+    width: 100vw;
+    height: 42vh;
+  }
+
+  .title {
+    font-size: 3.5rem;
+  }
+
+  .info {
+    font-size: 1.2rem;
+  }
+
+  .question {
+    font-size: 1.5rem;
+  }
+
+  .correct,
+  .wrong {
+    padding: 0;
+  }
+}

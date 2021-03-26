@@ -66,3 +66,23 @@ body {
   background-color: rgba(0, 0, 0, 0.74);
   cursor: pointer;
 }
+
+@media screen and (max-width: 1000px) {
+  .section {
+    width: 70vw;
+  }
+}
+
+@media screen and (max-width: 570px) {
+  .section {
+    width: 90vw;
+  }
+
+  .title {
+    font-size: 3.5rem;
+  }
+
+  .table {
+    width: 50vw;
+  }
+}
