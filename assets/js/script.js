@@ -12,7 +12,7 @@ timerSpanElement.textContent = timerValue;
 const questionsArray = [
   {
     question:
-      "Which is the following tags are used to link an external JavaScript file to a HTML document?",
+      "Which of the following tags are used to link an external JavaScript file to a HTML document?",
     choices: ["<link>", "<script>", "<a>", "<meta>"],
     answer: "<script>",
   },
@@ -110,7 +110,7 @@ const createAndAppendForm = () => {
   formElement.appendChild(inputElement);
 
   const submitScoreBtn = document.createElement("button");
-  submitScoreBtn.setAttribute("class", "submit-btn");
+  submitScoreBtn.setAttribute("class", "btn submit-btn");
   submitScoreBtn.setAttribute("id", "submit-btn");
   submitScoreBtn.setAttribute("type", "submit");
   submitScoreBtn.textContent = "Submit";
@@ -129,6 +129,7 @@ const startTimer = () => {
 
     if (timerValue <= 0) {
       timerValue = 0;
+      timerSpanElement.textContent = timerValue;
       clearInterval(timer);
       showGameOverContainer();
     }
@@ -150,7 +151,7 @@ const createAndAppendChoices = (choices) => {
 
     const button = document.createElement("button");
     button.setAttribute("data-answer", choice);
-    button.setAttribute("class", "choice-btn");
+    button.setAttribute("class", "btn choice-btn");
     button.textContent = choice;
 
     divElement.appendChild(button);

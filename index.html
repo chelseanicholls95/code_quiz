@@ -4,6 +4,11 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Karla:wght@500&family=Rubik:wght@300&display=swap"
+      rel="stylesheet"
+    />
     <link rel="stylesheet" type="text/css" href="./assets/css/style.css" />
     <title>Code Quiz</title>
   </head>
@@ -11,18 +16,22 @@
     <header>
       <div class="header-container">
         <div>
-          <a href="highscores.html">View High Scores</a>
+          <a href="highscores.html" class="link">View High Scores</a>
         </div>
 
-        <div>Timer: <span id="timer"></span></div>
+        <div class="timer">Timer: <span id="timer"></span></div>
       </div>
     </header>
 
     <section class="section" id="quiz-container">
       <div class="section-div" id="intro-section">
         <h1 class="title">Code Quiz</h1>
-        <div class="info">Info about quiz here</div>
-        <button class="start-btn" id="start-btn">Start Quiz</button>
+        <div class="info">
+          Try to answer the following code-related questions within the time
+          limit. Keep in mind that incorrect answers will penalize your
+          score/time by 10 seconds!
+        </div>
+        <button class="btn start-btn" id="start-btn">Start Quiz</button>
       </div>
     </section>
     <script src="assets/js/script.js" id="script"></script>
